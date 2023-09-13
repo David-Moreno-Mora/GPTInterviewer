@@ -19,20 +19,23 @@ from speech_recognition.openai_whisper import save_wav_file, transcribe
 from audio_recorder_streamlit import audio_recorder
 from aws.synthesize_speech import synthesize_speech
 from IPython.display import Audio
+from PIL import Image
 
+def callAPIJD():
+    print(st.experimental_get_query_params())
 
 def load_lottiefile(filepath: str):
     with open(filepath, "r") as f:
         return json.load(f)
-st_lottie(load_lottiefile("images/welcome.json"), speed=1, reverse=False, loop=True, quality="high", height=300)
+#st_lottie(load_lottiefile("images/welcome.json"), speed=1, reverse=False, loop=True, quality="high", height=300)
 
-#st.markdown("""solutions to potential errors:""")
-with st.expander("""Why did I encounter errors when I tried to talk to the AI Interviewer?"""):
-    st.write("""
-    This is because the app failed to record. Make sure that your microphone is connected and that you have given permission to the browser to access your microphone.""")
+image = Image.open("images/favicon.png")
+st.image(image)
 
-jd = st.text_area("Please enter the job description here (If you don't have one, enter keywords, such as PostgreSQL or Python instead): ")
-auto_play = st.checkbox("Let AI interviewer speak! (Please don't switch during the interview)")
+callAPIJD()
+
+jd = st.text_area("Please enter the job description here: ")
+auto_play = False
 
 #st.toast("4097 tokens is roughly equivalent to around 800 to 1000 words or 3 minutes of speech. Please keep your answer within this limit.")
 
